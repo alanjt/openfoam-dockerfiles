@@ -39,31 +39,31 @@ Linux: Choose the .tar.gz archieve and extract it
 *2b)* Open a Powershell (Windows) or a terminal (macOS or Linux) and run the following commands. First, make a folder to store your OpenFOAM data:
 
 ```shell
-mkdir $HOME/openfoam-data
+mkdir C:/fg/AircraftDev/openfoam-data
 ```
 
 *2c)* Next, clone this repository by:
-
+## (forked from original at git clone https://github.com/jakobhaervig/openfoam-dockerfiles
 ```shell
-git clone https://github.com/jakobhaervig/openfoam-dockerfiles.git $HOME/openfoam-dockerfiles
+git clone https://github.com/alanjt/openfoam-dockerfiles.git C:/fg/AircraftDev/openfoam-dockerfiles
 ```
 
-You should now have two folder ```openfoam-data``` and ```openfoam-dockerfiles``` in your home folder.
+You should now have two folder ```openfoam-data``` and ```openfoam-dockerfiles``` in the folder C:/fg/AircraftDev.
 
 *2d)* Now, start the program called Docker Desktop to start the Docker engine.
 
 *2e)* Build the OpenFOAM image:
 
 ```shell
-docker image build --no-cache -t openfoam $HOME/openfoam-dockerfiles/esi/latest/
+docker image build --no-cache -t openfoam C:/fg/AircraftDev/openfoam-dockerfiles/esi/latest/
 ```
 
 ## 3. Run the Docker container
 
-*3a)* Finally, start a Docker container with ``/data`` mapped to ``$HOME/openfoam-data``:
+*3a)* Finally, start a Docker container with ``/data`` mapped to ``C:/fg/AircraftDev/openfoam-data``:
 
 ```shell
-docker container run -ti --rm -v $HOME/openfoam-data:/data -w /data openfoam:latest
+docker container run -ti --rm -v C:/fg/AircraftDev/openfoam-data:/data -w /data openfoam:latest
 ```
 
 Note: All files stored in the container are deleted when you exit the container. Therefore you should save your simulation results and solver development in ``/data``, which is the only directory that persists when the container is closed.
@@ -72,13 +72,9 @@ Running the above command should leave you inside the Docker container with the 
 
 ## 4. Accessing files in the Docker container
 
-You may access the container through ``$HOME/openfoam-data`` e.g.:
+You may access the container through ``C:/fg/Aircraft/Devopenfoam-data`` e.g.:
 
-On a Windows system: ``C:\Users\jakob\openfoam-data``
-
-On a macOS system: ``/Users/jakob/openfoam-data``
-
-On most Linux systems: ``/home/jakob/openfoam-data``
+On Local Windows system: ``C:/fg/AircraftDev/openfoam-data``
 
 ## 5. Optional: Save an alias for running the Docker container
 Instead of starting a Docker container with the command in [3. Run the Docker container](#3-run-the-docker-container), we can save an alias for that command. With an alias saved we can simply type ```of``` (short for OpenFOAM) in a Powershell (Windows) or a terminal (macOS or Linux) to start the Docker container.
@@ -98,7 +94,7 @@ New-Item -Path $profile -ItemType file -force
 
 *5d)* Add the alias to the newly created file:
 ```shell
-echo "function openfoam-docker-latest {docker container run -ti --rm -v $HOME/openfoam-data:/data -w /data openfoam:latest} Set-Alias of openfoam-docker-latest" > $profile
+echo "function openfoam-docker-latest {docker container run -ti --rm -v C:/fg/AircraftDev/openfoam-data:/data -w /data openfoam:latest} Set-Alias of openfoam-docker-latest" > $profile
 ```
 
 We can now start the container using the newly created ```of``` alias by typing ```of``` in the Power Shell.
@@ -122,15 +118,16 @@ If you need to add extensions to your image, you may extend it by following the 
 *6a)* To extend our Docker image to include a Python installation with different useful packages:
 
 ```shell
-docker image build -t openfoam $HOME/openfoam-dockerfiles/extensions/python
+docker image build -t openfoam C:/fg/AircraftDev/openfoam-dockerfiles/extensions/python
 ```
 
 *6b)* To extend our Docker image to include a FreeCad installation:
 
 ```shell
-docker image build -t openfoam $HOME/openfoam-dockerfiles/extensions/freecad
+docker image build -t openfoam C:/fg/AircraftDev/openfoam-dockerfiles/extensions/freecad
 ```
 
 ## 7. Author list
 
 Jakob Hærvig
+Alan Teeder - (local setup)
