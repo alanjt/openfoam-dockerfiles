@@ -1,0 +1,42 @@
+Enter these commands from a command window in directory D:\fg\AircraftDev\openfoam-tutorials
+
+1. In Windows open Docker Desktop -- (D:\Program Files\Docker\Docker\Docker Desktop.exe)
+
+2. docker container run -ti --rm -v D:/fg/AircraftDev/openfoam-tutorials/motorBike/:/home/foam/motorBike -w /home/foam openfoam:latest
+
+Steps 3-6 only necessary if tutorial has not been installed, if tutorial has been installed, go to step 7.
+
+3. cp -r $FOAM_TUTORIALS/incompressible/simpleFoam/motorBike/ .
+
+4. cd motorBike
+   mkdir constant/triSurface
+
+5. cp $FOAM_TUTORIALS/resources/geometry/motorBike.obj.gz constant/triSurface/
+
+6. gunzip constant/triSurface/motorBike.obj.gz
+
+7. In Windows open Paraview (D:\Program Files\ParaView 5.11.2\bin\paraview.exe)
+
+8. In Paraview open file D:\fg\AircraftDev\openfoam-tutorials\motorBike\constant\triSurface\motorBike.obj
+
+9. Make a copy of file motorBike/decomposeParDict.6 and save it as motorBike/decomposeParDict.4
+
+10.In this new file decomposeParDict.4 edit lines 17 and 23 to become
+           numberOfSubdomains 4;
+           n           (2 2 1); 
+		   
+12. Edit file motorBike/Allrun, line 7 to use file decomposeParDict.4 instead of decomposeParDict.6
+
+decompDict="-decomposeParDict system/decomposeParDict.4"
+
+13. Start tutorial with Allrun
+
+14. Cl, Cd, Cm etc results are at the end of file log.simpleFoam
+
+15. From Windows, Paraview may now be used to mesh and the airflow distribution etc. 
+
+
+
+
+
+
