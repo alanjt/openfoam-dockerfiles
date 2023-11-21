@@ -72,7 +72,7 @@ Running the above command should leave you inside the Docker container with the 
 
 ## 4. Accessing files in the Docker container
 
-You may access the container through ``C:/fg/Aircraft/Devopenfoam-data`` e.g.:
+You may access the container through ``C:/fg/AircraftDev/openfoam-data`` e.g.:
 
 On Local Windows system: ``C:/fg/AircraftDev/openfoam-data``
 
